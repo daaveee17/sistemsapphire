@@ -35,12 +35,16 @@ try:
     print("ANALISIS DESKRIPTIF DATASET")
     print("=" * 65)
 
-    # Statistik numerik
-    numerik_cols = ['Luas Bangunan', 'Luas Tanah', 'Jumlah Kamar Mandi', 'Jumlah Kamar Tidur', 'Harga KPR']
+    # Encoding awal untuk keperluan statistik
+    le_blok = LabelEncoder()
+    df['Blok_Encoded'] = le_blok.fit_transform(df['Nama Blok'])
+    
+    numerik_cols = ['Luas Bangunan', 'Luas Tanah', 'Jumlah Kamar Mandi', 'Jumlah Kamar Tidur', 'Harga KPR', 'Blok_Encoded']
     desc_stats = {}
     for col in numerik_cols:
+        nama_tampil = 'Blok Kavling' if col == 'Blok_Encoded' else col
         stats = df[col].describe()
-        desc_stats[col] = {
+        desc_stats[nama_tampil] = {
             'count': int(stats['count']),
             'mean': round(float(stats['mean']), 2),
             'std': round(float(stats['std']), 2),
@@ -48,7 +52,7 @@ try:
             'max': float(stats['max']),
             'median': float(df[col].median())
         }
-        print(f"\n{col}:")
+        print(f"\n{nama_tampil}:")
         print(f"  Mean: {stats['mean']:,.2f} | Std: {stats['std']:,.2f}")
         print(f"  Min: {stats['min']:,.0f} | Max: {stats['max']:,.0f} | Median: {df[col].median():,.0f}")
 
@@ -94,17 +98,15 @@ try:
     print("PREPROCESSING DATA")
     print("=" * 65)
 
-    # Label Encoding - Nama Blok
-    le_blok = LabelEncoder()
-    df['Blok_Encoded'] = le_blok.fit_transform(df['Nama Blok'])
+    # Label Encoding - Nama Blok (sudah dilakukan di atas)
     joblib.dump(le_blok, os.path.join(folder_path, 'le_blok.pkl'))
     print(f"Nama Blok: {len(le_blok.classes_)} kategori -> Label Encoded")
 
-    # Label Encoding - Posisi Kavling
-    le_posisi = LabelEncoder()
-    df['Posisi_Encoded'] = le_posisi.fit_transform(df['Posisi Kavling'])
-    joblib.dump(le_posisi, os.path.join(folder_path, 'le_posisi.pkl'))
-    print(f"Posisi Kavling: {len(le_posisi.classes_)} kategori -> Label Encoded")
+    # Label Encoding - Posisi Kavling (Dihapus)
+    # le_posisi = LabelEncoder()
+    # df['Posisi_Encoded'] = le_posisi.fit_transform(df['Posisi Kavling'])
+    # joblib.dump(le_posisi, os.path.join(folder_path, 'le_posisi.pkl'))
+    # print(f"Posisi Kavling: {len(le_posisi.classes_)} kategori -> Label Encoded")
 
     # Smart Door Lock -> Binary
     df['Smart_Lock_N'] = df['Smart Door Lock'].apply(lambda x: 1 if str(x).strip() == 'Ya' else 0)
@@ -117,12 +119,12 @@ try:
     features = [
         'Blok_Encoded', 'Luas_Bangunan', 'Luas_Tanah',
         'Jumlah_Kamar_Tidur', 'Jumlah_Kamar_Mandi',
-        'Posisi_Encoded', 'Smart_Lock_N'
+        'Smart_Lock_N'
     ]
     feature_labels = [
         'Nama Blok', 'Luas Bangunan', 'Luas Tanah',
         'Jumlah Kamar Tidur', 'Jumlah Kamar Mandi',
-        'Posisi Kavling', 'Smart Door Lock'
+        'Smart Door Lock'
     ]
 
     X = df[features]
@@ -316,7 +318,7 @@ try:
         'metrik_model': hasil_metrik,
         'optimizer_terbaik': best_opt,
         'arsitektur': {
-            'input_layer': 7,
+            'input_layer': 6,
             'hidden_layers': [64, 32, 16],
             'output_layer': 1,
             'aktivasi': 'ReLU',

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Latih Ulang Model - Sapphire Residence{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="mb-1" style="font-weight: 700; color: var(--primary-color);">Latih Ulang Model</h2>
+        <p class="text-muted mb-0">Perbarui model machine learning dengan dataset terbaru.</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-header bg-white border-0 pt-4 pb-2">
+                <h5 class="fw-bold mb-0"><i class="bi bi-arrow-repeat text-primary me-2"></i>Latih Ulang Model</h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted small mb-4">Unggah file CSV dataset baru untuk memperbarui model prediksi harga. Pastikan format kolom sesuai dengan dataset sebelumnya.</p>
+                
+                <form action="/admin/latih_model" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="dataset" class="form-label fw-semibold">Dataset (.csv)</label>
+                        <input class="form-control" type="file" id="dataset" name="dataset" accept=".csv" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 mt-2" onclick="return confirm('Apakah Anda yakin ingin melatih ulang model dengan data ini? Proses ini mungkin memakan waktu beberapa saat.')">
+                        <i class="bi bi-cpu me-2"></i>Mulai Training
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+{% block title %}Estimasi Nilai Properti - Sapphire Residence Tegal{% endblock %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div>
+        <h1>Estimasi Nilai Properti</h1>
+        <p class="page-subtitle">Pelajari bagaimana model kecerdasan buatan menghitung nilai properti Anda secara
+            objektif.</p>
+    </div>
+    <div>
+    </div>
+</div>
+
+<!-- SECTION 1: Mengapa Perlu Cek Estimasi Nilai Properti -->
+<div class="card-panel mb-4">
+    <div class="text-center py-3 mb-4">
+        <h2 class="fw-bold" style="color: var(--color-primary);">Mengapa Perlu Cek Estimasi Nilai Properti?</h2>
+        <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">Fitur penunjang keputusan yang
+            membantu baik penjual maupun pembeli dalam menilai unit properti secara transparan.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Pemilik Properti -->
+        <div class="col-md-6 col-lg-5">
+            <div class="card p-4 border-0 h-100 shadow-sm"
+                style="border-radius: var(--radius-lg); background: var(--color-surface-alt); transition: all var(--transition);">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-box me-3"
+                        style="background: var(--color-primary-subtle); color: var(--color-primary); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                        <i class="bi bi-person-workspace"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: var(--color-text);">Sapphire Residence</h4>
+                </div>
+                <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+                    Meningkatkan kepercayaan konsumen dengan membuka akses estimasi nilai secara transparan,
+                    Sapphire Residence menunjukkan integritas dan profesionalisme tinggi, yang secara langsung
+                    meningkatkan kredibilitas di mata publik.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pembeli Properti -->
+        <div class="col-md-6 col-lg-5">
+            <div class="card p-4 border-0 h-100 shadow-sm"
+                style="border-radius: var(--radius-lg); background: var(--color-surface-alt); transition: all var(--transition);">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="icon-box me-3"
+                        style="background: var(--color-accent-subtle); color: var(--color-accent); width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                        <i class="bi bi-wallet2"></i>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="color: var(--color-text);">Pembeli Properti</h4>
+                </div>
+                <p style="color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0;">
+                    Bandingkan harga properti idamanmu dengan estimasi nilai properti yang objektif berdasarkan lokasi
+                    dan spesifikasi unit fisik secara real-time.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 2: Cara Perhitungan SapphireValue -->
+<div class="card-panel mb-4">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-3" style="color: var(--color-primary);">Bagaimana cara perhitunganya?</h2>
+            <p style="color: var(--color-text-secondary); font-size: 1rem; line-height: 1.7; margin-bottom: 24px;">
+                Dengan menggunakan model kecerdasan buatan <strong>Artificial Neural Network
+                    (ANN)</strong> yang dilatih menggunakan data historis transaksi riil unit perumahan Sapphire
+                Residence Tegal. Model menganalisis rata-rata properti yang memiliki lokasi dan spesifikasi serupa di
+                pasaran.
+            </p>
+
+            <h5 class="fw-bold mb-3" style="color: var(--color-text);">Apa saja faktor yang mempengaruhi perhitungan?
+            </h5>
+            <div class="row g-3">
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-arrows-fullscreen" style="color: var(--color-accent); font-size: 18px;"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500; color: var(--color-text);">Luas
+                            Bangunan</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-bounding-box-circles" style="color: var(--color-accent); font-size: 18px;"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500; color: var(--color-text);">Luas Tanah</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-geo-alt" style="color: var(--color-accent); font-size: 18px;"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500; color: var(--color-text);">Lokasi (Blok
+                            Kavling)</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-door-closed" style="color: var(--color-accent); font-size: 18px;"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500; color: var(--color-text);">Kamar Tidur</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-droplet" style="color: var(--color-accent); font-size: 18px;"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500; color: var(--color-text);">Kamar Mandi</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-shield-check" style="color: var(--color-accent); font-size: 18px;"></i>
+                        <span style="font-size: 0.95rem; font-weight: 500; color: var(--color-text);">Smart Door
+                            Lock</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 text-center">
+            <img src="{{ url_for('static', filename='img/sapphire_val_calc.png') }}"
+                alt="Ilustrasi Cara Perhitungan SapphireValue" class="img-fluid"
+                style="max-height: 320px; border-radius: var(--radius-lg); filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));">
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: Mudahnya Cek SapphireValue di Aplikasi -->
+<div class="card-panel mb-4"
+    style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%); color: #ffffff;">
+    <div class="row align-items-center g-4">
+        <!-- Phone Mockup -->
+        <div class="col-lg-5 text-center order-lg-2">
+            <img src="{{ url_for('static', filename='img/IMG_5012 (1).PNG') }}" alt="Sapphire Mobile App Mockup"
+                class="img-fluid" style="max-height: 420px; border-radius: 24px; box-shadow: 0 25px 50px rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.1);">
+        </div>
+
+        <!-- Accordion Steps -->
+        <div class="col-lg-7 order-lg-1">
+            <h2 class="fw-bold mb-3 text-white">Mudahnya cek langsung sekarang!</h2>
+            <p style="color: rgba(255,255,255,0.85); font-size: 1rem; margin-bottom: 24px;">Ikuti langkah-langkah
+                praktis berikut untuk menguji estimasi harga unit properti Anda di dalam sistem web kami.</p>
+
+            <div class="accordion accordion-custom" id="stepsAccordion">
+                <!-- Step 1 -->
+                <div class="accordion-item mb-2">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                            style="background: transparent; color: #ffffff; box-shadow: none; font-weight: 600; font-size: 0.95rem;">
+                            <span class="step-num me-2"
+                                style="background: #ffffff; color: var(--color-primary); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">1</span>
+                            Buka Simulasi Harga
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#stepsAccordion">
+                        <div class="accordion-body"
+                            style="color: rgba(255,255,255,0.8); font-size: 0.9rem; padding-top: 0; line-height: 1.6;">
+                            Masuk ke halaman utama website Sapphire Residence Tegal untuk mengakses dashboard kalkulator
+                            terintegrasi.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="accordion-item mb-2">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                            style="background: transparent; color: #ffffff; box-shadow: none; font-weight: 600; font-size: 0.95rem;">
+                            <span class="step-num me-2"
+                                style="background: #ffffff; color: var(--color-primary); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">2</span>
+                            Masukkan Spesifikasi Unit
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#stepsAccordion">
+                        <div class="accordion-body"
+                            style="color: rgba(255,255,255,0.8); font-size: 0.9rem; padding-top: 0; line-height: 1.6;">
+                            Isi luas bangunan, luas tanah, jumlah kamar tidur, jumlah kamar mandi, dan fitur Smart Door
+                            Lock pada form spesifikasi.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="accordion-item mb-2">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                            style="background: transparent; color: #ffffff; box-shadow: none; font-weight: 600; font-size: 0.95rem;">
+                            <span class="step-num me-2"
+                                style="background: #ffffff; color: var(--color-primary); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">3</span>
+                            Pilih Lokasi & Blok Properti
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#stepsAccordion">
+                        <div class="accordion-body"
+                            style="color: rgba(255,255,255,0.8); font-size: 0.9rem; padding-top: 0; line-height: 1.6;">
+                            Pilih lokasi blok kavling unit yang Anda rencanakan (misalnya Blok Ruby atau Blok Zamrud)
+                            pada dropdown menu.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="accordion-item mb-2">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                            style="background: transparent; color: #ffffff; box-shadow: none; font-weight: 600; font-size: 0.95rem;">
+                            <span class="step-num me-2"
+                                style="background: #ffffff; color: var(--color-primary); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">4</span>
+                            Masukkan Informasi Finansial
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                        data-bs-parent="#stepsAccordion">
+                        <div class="accordion-body"
+                            style="color: rgba(255,255,255,0.8); font-size: 0.9rem; padding-top: 0; line-height: 1.6;">
+                            Masukkan estimasi penghasilan bulanan bersih Anda, jangka waktu cicilan (tenor), dan nominal
+                            Uang Muka (DP).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="accordion-item mb-0">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive"
+                            style="background: transparent; color: #ffffff; box-shadow: none; font-weight: 600; font-size: 0.95rem;">
+                            <span class="step-num me-2"
+                                style="background: #ffffff; color: var(--color-primary); width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700;">5</span>
+                            Lihat Perhitungan & Analisis Kredit
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                        data-bs-parent="#stepsAccordion">
+                        <div class="accordion-body"
+                            style="color: rgba(255,255,255,0.8); font-size: 0.9rem; padding-top: 0; line-height: 1.6;">
+                            Klik tombol "Hitung Prediksi" untuk melihat nilai estimasi properti secara presisi beserta
+                            analisis DSR status kelayakan kredit.
+                        </div>
+                    </div>
+                    <a href="/" class="btn-primary-custom"
+                        style="padding: 12px 24px; font-size: 0.95rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: var(--shadow-md);">
+                        <i class="bi bi-calculator"></i>
+                        Mulai Estimasi Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

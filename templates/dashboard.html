@@ -51,12 +51,8 @@
             <thead>
                 <tr>
                     <th>Optimizer</th>
-                    <th class="cell-right">R2 Score</th>
                     <th class="cell-right">MAE (Rp)</th>
-                    <th class="cell-right">RMSE (Rp)</th>
-                    <th class="cell-right">MAPE (%)</th>
-                    <th class="cell-right">Akurasi (%)</th>
-                    <th class="cell-right">Iterasi</th>
+                    <th class="cell-right">R2 Score</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,12 +64,8 @@
                         <span class="status-badge badge-success ms-2" style="font-size: 10px;">Terbaik</span>
                         {% endif %}
                     </td>
-                    <td class="cell-right cell-mono">{{ "%.6f"|format(m.r2) }}</td>
                     <td class="cell-right cell-mono">{{ "{:,.0f}".format(m.mae)|replace(",", ".") }}</td>
-                    <td class="cell-right cell-mono">{{ "{:,.0f}".format(m.rmse)|replace(",", ".") }}</td>
-                    <td class="cell-right cell-mono">{{ "%.4f"|format(m.mape) }}</td>
-                    <td class="cell-right cell-mono">{{ "%.4f"|format(m.akurasi) }}</td>
-                    <td class="cell-right cell-mono">{{ m.n_iter }}</td>
+                    <td class="cell-right cell-mono">{{ "%.6f"|format(m.r2) }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -105,28 +97,7 @@
     </div>
 </div>
 
-<div class="row g-4 mt-0">
-    <div class="col-lg-6">
-        <div class="card-panel">
-            <div class="card-panel-header">
-                <span class="card-panel-title">MAPE per Optimizer (%)</span>
-            </div>
-            <div class="chart-container">
-                <canvas id="chartMAPE" height="260"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card-panel">
-            <div class="card-panel-header">
-                <span class="card-panel-title">Loss Curve (Training)</span>
-            </div>
-            <div class="chart-container">
-                <canvas id="chartLoss" height="260"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <!-- KESIMPULAN -->
 <div class="card-panel">
@@ -150,7 +121,7 @@
 <!-- Tombol Export -->
 <div class="row g-3 no-print">
     <div class="col-6">
-        <a href="/export/dashboard" class="btn-primary-custom" style="background: #0d7c66; text-decoration: none;">
+        <a href="/export/dashboard" class="btn-primary-custom" style="background: var(--color-accent); text-decoration: none;">
             <i class="bi bi-file-earmark-spreadsheet"></i>
             Export Excel
         </a>
@@ -251,83 +222,6 @@
         options: baseOptions
     });
 
-    // MAPE Chart
-    const mapeValues = labels.map(l => {
-        const v = metrikData[l].mape;
-        return v > 100 ? 100 : v;
-    });
-    new Chart(document.getElementById('chartMAPE'), {
-        type: 'bar',
-        data: {
-            labels: labels,
-            datasets: [{
-                data: mapeValues,
-                backgroundColor: bgColors,
-                borderColor: borderColors,
-                borderWidth: 1.5,
-                borderRadius: 6,
-                barPercentage: 0.5
-            }]
-        },
-        options: baseOptions
-    });
 
-    // Loss Curve Chart
-    const lossDatasets = [];
-    const lossColorList = ['#7c3aed', '#f59e0b', '#10b981'];
-    let idx = 0;
-    for (const [name, data] of Object.entries(metrikData)) {
-        if (data.loss_curve && data.loss_curve.length > 0) {
-            lossDatasets.push({
-                label: name,
-                data: data.loss_curve,
-                borderColor: lossColorList[idx % 3],
-                backgroundColor: 'transparent',
-                borderWidth: 2,
-                pointRadius: 0,
-                tension: 0.3
-            });
-        }
-        idx++;
-    }
-
-    if (lossDatasets.length > 0) {
-        const maxLen = Math.max(...lossDatasets.map(d => d.data.length));
-        new Chart(document.getElementById('chartLoss'), {
-            type: 'line',
-            data: {
-                labels: Array.from({length: maxLen}, (_, i) => i + 1),
-                datasets: lossDatasets
-            },
-            options: {
-                ...baseOptions,
-                plugins: {
-                    ...baseOptions.plugins,
-                    legend: {
-                        display: true,
-                        labels: {
-                            font: { family: "'Plus Jakarta Sans'", size: 12, weight: '600' },
-                            usePointStyle: true,
-                            pointStyle: 'circle',
-                            padding: 16
-                        }
-                    }
-                },
-                scales: {
-                    ...baseOptions.scales,
-                    x: {
-                        ...baseOptions.scales.x,
-                        title: { display: true, text: 'Epoch', font: { family: "'Plus Jakarta Sans'", size: 12 } }
-                    },
-                    y: {
-                        ...baseOptions.scales.y,
-                        title: { display: true, text: 'Loss', font: { family: "'Plus Jakarta Sans'", size: 12 } }
-                    }
-                }
-            }
-        });
-    } else {
-        document.getElementById('chartLoss').parentElement.innerHTML = '<div style="text-align:center;padding:40px;color:#9ca3af;font-size:13px;">Loss curve hanya tersedia untuk optimizer Adam dan SGD.</div>';
-    }
 </script>
 {% endblock %}

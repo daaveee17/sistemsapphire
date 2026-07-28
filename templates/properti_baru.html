@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}Properti Baru - Sapphire Residence Tegal{% endblock %}
+
+{% block hero %}
+<!-- HERO SECTION & BANNER -->
+<div class="hero-section mb-4 shadow-sm" style="
+    position: relative; 
+    border-radius: 0; 
+    overflow: hidden; 
+    padding: 80px 40px; 
+    display: flex; 
+    align-items: center; 
+    min-height: 420px;">
+
+    <!-- Background Image -->
+    <div style="
+        position: absolute; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        background-image: url('{{ url_for('static', filename='img/footage_sapphire_residence_tegal_02_1x.webp') }}'); 
+        background-size: cover; 
+        background-position: center; 
+        z-index: 0;">
+    </div>
+
+    <!-- Gradient Overlay -->
+    <div style="
+        position: absolute; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        background: linear-gradient(90deg, rgba(17, 24, 39, 0.95) 0%, rgba(17, 24, 39, 0.75) 50%, rgba(17, 24, 39, 0.2) 100%);
+        z-index: 1;">
+    </div>
+
+    <!-- Hero Content -->
+    <div class="hero-content" style="position: relative; z-index: 2; max-width: 650px;">
+        <h1 class="fw-bold mb-1 text-white" style="font-size: 3rem; line-height: 1.1; letter-spacing: -1.5px;">
+            Sapphire Residence
+        </h1>
+        <h2 class="fw-bold mb-3" style="color: var(--color-accent-light); font-size: 2.2rem; letter-spacing: -1px;">
+            Tahap III & IV
+        </h2>
+        <p style="color: #d1d5db; font-size: 1.1rem; line-height: 1.6; margin-bottom: 20px;">
+            Jl. Siklepuh Raya, Mejasem, Pacul, Kec. Talang, Kota Tegal
+        </p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- SECTION 2: PILIHAN 800++ MASYARAKAT TEGAL -->
+<div class="card-panel mb-4" style="background: linear-gradient(135deg, var(--color-primary-subtle) 0%, #ffffff 100%);">
+    <div class="row align-items-center g-4">
+        <div class="col-lg-5 order-lg-2 text-center">
+            <!-- Project Image -->
+            <img src="{{ url_for('static', filename='img/footage_sapphire_residence_tegal_02_1x.webp') }}"
+                alt="Unit Sapphire Residence Tegal" class="img-fluid shadow"
+                style="border-radius: var(--radius-lg); max-height: 280px; width: 100%; object-fit: cover;">
+        </div>
+        <div class="col-lg-7 order-lg-1">
+            <h2 class="fw-bold mb-2" style="color: var(--color-primary); font-size: 2.2rem; letter-spacing: -1px;">
+                Pilihan 800++ Masyarakat Tegal</h2>
+            <h5 class="fw-semibold mb-4" style="color: var(--color-accent);"><i class="bi bi-info-circle me-1"></i>
+                Fasilitas Lengkap. Nyaman. Strategis</h5>
+
+            <p
+                style="color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.7; text-align: justify; margin-bottom: 20px;">
+                <strong>Sapphire Residence Tegal</strong> telah menjadi pilihan utama bagi lebih dari 800 keluarga,
+                membuktikan kualitas, kenyamanan, dan kepercayaan tinggi sebagai kawasan hunian premium paling diminati
+                di Kota Tegal. Proyek hunian ini memadukan aksesibilitas strategis perkotaan dengan tatanan lingkungan
+                mandiri yang rapi, asri, dan aman bagi keluarga tercinta.
+            </p>
+
+            <p
+                style="color: var(--color-text-secondary); font-size: 1.05rem; line-height: 1.7; text-align: justify; margin-bottom: 0;">
+                Setiap detail sudut kawasan dirancang dengan cermat untuk menghadirkan keseimbangan harmonis antara
+                kenyamanan modern, ketenangan hunian, dan potensi pertumbuhan nilai investasi properti yang tinggi dari
+                tahun ke tahun.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION 3: AKSESIBILITAS -->
+<div class="card-panel mb-4">
+    <div class="text-center py-3 mb-4">
+        <h2 class="fw-bold mb-2" style="color: var(--color-primary);">Aksesibilitas Strategis</h2>
+        <p style="color: var(--color-text-secondary); max-width: 600px; margin: 0 auto;">Terletak di lokasi prima dengan
+            kemudahan akses menuju pusat pendidikan, perbelanjaan, transportasi, dan fasilitas umum lainnya di Kota
+            Tegal.</p>
+    </div>
+
+    <div class="row align-items-center g-4 justify-content-center">
+        <!-- Left Side Cards (Pendidikan & Publik) -->
+        <div class="col-lg-4 col-md-6 d-flex flex-column gap-4">
+            <!-- Pendidikan -->
+            <div class="card border p-3 shadow-sm h-100"
+                style="border-radius: var(--radius-lg); background: var(--color-surface);">
+                <h5 class="fw-bold mb-3" style="color: var(--color-primary);"><i
+                        class="bi bi-mortarboard-fill text-primary me-2"></i>Fasilitas Pendidikan</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2 mb-0"
+                    style="font-size: 0.95rem; color: var(--color-text-secondary);">
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>SMKN 1 Dukuhturi</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">9 Menit</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>SMAN 1 Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">13 Menit</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>Universitas Pancasakti Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">17 Menit</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Publik -->
+            <div class="card border p-3 shadow-sm h-100"
+                style="border-radius: var(--radius-lg); background: var(--color-surface);">
+                <h5 class="fw-bold mb-3" style="color: var(--color-primary);"><i
+                        class="bi bi-tree-fill text-primary me-2"></i>Fasilitas Publik</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2 mb-0"
+                    style="font-size: 0.95rem; color: var(--color-text-secondary);">
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>Alun-Alun Kota Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">15 Menit</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>Stasiun Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">15 Menit</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Center Map Pin Mockup -->
+        <div class="col-lg-4 col-md-8 text-center order-md-first order-lg-0 py-3">
+            <div class="d-inline-block p-4 bg-light rounded-circle shadow-sm"
+                style="position: relative; animation: pulse 3s infinite;">
+                <div style="background: rgba(13, 110, 253, 0.1); border-radius: 50%; padding: 30px;">
+                    <i class="bi bi-geo-alt-fill text-primary"
+                        style="font-size: 100px; display: block; filter: drop-shadow(0 10px 15px rgba(13, 110, 253, 0.4));"></i>
+                </div>
+                <!-- Interactive styling tags -->
+                <span class="position-absolute badge bg-primary shadow-sm"
+                    style="top: 15%; left: 0%; transform: rotate(-5deg); font-size: 0.85rem;">Pusat Tegal</span>
+                <span class="position-absolute badge bg-success shadow-sm"
+                    style="bottom: 15%; right: 0%; transform: rotate(5deg); font-size: 0.85rem;">Bebas Banjir</span>
+            </div>
+
+            <style>
+                @keyframes pulse {
+                    0% {
+                        transform: scale(1);
+                    }
+
+                    50% {
+                        transform: scale(1.03);
+                    }
+
+                    100% {
+                        transform: scale(1);
+                    }
+                }
+            </style>
+        </div>
+
+        <!-- Right Side Cards (Perbelanjaan & Kesehatan) -->
+        <div class="col-lg-4 col-md-6 d-flex flex-column gap-4">
+            <!-- Perbelanjaan -->
+            <div class="card border p-3 shadow-sm h-100"
+                style="border-radius: var(--radius-lg); background: var(--color-surface);">
+                <h5 class="fw-bold mb-3" style="color: var(--color-primary);"><i
+                        class="bi bi-cart-fill text-primary me-2"></i>Pusat Perbelanjaan</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2 mb-0"
+                    style="font-size: 0.95rem; color: var(--color-text-secondary);">
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>Pasar Langon Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">6 Menit</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>Pacific Mall Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">15 Menit</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Kesehatan -->
+            <div class="card border p-3 shadow-sm h-100"
+                style="border-radius: var(--radius-lg); background: var(--color-surface);">
+                <h5 class="fw-bold mb-3" style="color: var(--color-primary);"><i
+                        class="bi bi-hospital-fill text-primary me-2"></i>Fasilitas Kesehatan</h5>
+                <ul class="list-unstyled d-flex flex-column gap-2 mb-0"
+                    style="font-size: 0.95rem; color: var(--color-text-secondary);">
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>RSIA Pala Raya Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">4 Menit</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>RSUD Kardinah Tegal</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">10 Menit</span>
+                    </li>
+                    <li class="d-flex justify-content-between align-items-center">
+                        <span>RSU Islam Harapan Anda</span>
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-2.5 py-1"
+                            style="font-size: 0.8rem;">14 Menit</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

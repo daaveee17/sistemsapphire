@@ -261,7 +261,7 @@ a:hover { color: var(--color-primary); }
     .sidebar.show {
         transform: translateX(0);
     }
-    .main-content {
+    .main-content:not(.no-sidebar) {
         margin-left: 0 !important;
         padding-top: 72px !important;
     }
@@ -279,11 +279,17 @@ a:hover { color: var(--color-primary); }
     flex-direction: column;
 }
 
+.main-content.no-sidebar {
+    margin-left: 0 !important;
+}
+
 .content-wrapper {
     flex: 1;
     padding: 32px;
     max-width: 1200px;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media (max-width: 767.98px) {
@@ -870,3 +876,241 @@ a:hover { color: var(--color-primary); }
 .gap-12 { gap: 12px; }
 .gap-16 { gap: 16px; }
 .gap-20 { gap: 20px; }
+
+/* ================================================================
+   BANK PARTNERS SECTION
+   ================================================================ */
+
+.partners-section {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+}
+
+@media (max-width: 1199.98px) {
+    .partners-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 991.98px) {
+    .partners-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .partners-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+}
+
+.partner-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    transition: all var(--transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.partner-item:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent-light);
+    box-shadow: var(--shadow-md);
+    background: var(--color-surface);
+}
+
+.partner-item svg, .partner-item img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    filter: none;
+    opacity: 0.9;
+    transition: all var(--transition);
+    object-fit: contain;
+}
+
+.partner-item:hover svg, .partner-item:hover img {
+    opacity: 1;
+}
+
+/* ================================================================
+   KPR PROCESS FLOW SECTION
+   ================================================================ */
+
+.kpr-flow-section {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.kpr-flow-slider-container {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-top: 15px;
+    margin-top: 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.kpr-flow-slider-container::-webkit-scrollbar {
+    display: none;
+}
+
+.kpr-flow-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.kpr-flow-card {
+    flex: 0 0 280px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 24px 20px 20px 20px;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.kpr-flow-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent-light);
+}
+
+.kpr-flow-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 28px;
+    background: var(--color-primary);
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    box-shadow: 0 2px 6px rgba(30, 58, 95, 0.4);
+    z-index: 2;
+}
+
+.kpr-flow-icon {
+    font-size: 24px;
+    color: var(--color-accent);
+    background: var(--color-accent-subtle);
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px auto 16px auto;
+    transition: all var(--transition);
+}
+
+.kpr-flow-card:hover .kpr-flow-icon {
+    background: var(--color-accent);
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.kpr-flow-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 12px;
+    line-height: 1.3;
+    text-align: center;
+}
+
+.kpr-flow-desc {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.kpr-flow-nav {
+    display: flex;
+    gap: 8px;
+}
+
+.kpr-flow-nav .btn-nav {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition);
+}
+
+.kpr-flow-nav .btn-nav:hover {
+    background: var(--color-primary);
+    color: #ffffff;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+/* Custom Accordion for Dark Backgrounds */
+.accordion-custom .accordion-item {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+}
+
+.accordion-custom .accordion-button {
+    background: transparent !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.accordion-custom .accordion-button::after {
+    filter: invert(1) grayscale(1) brightness(2); /* turn arrow white */
+}
+
+.accordion-custom .accordion-button:not(.collapsed) {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #ffffff !important;
+}
+
+/* Mini Phone Animation and Styling */
+.mini-phone {
+    transition: all var(--transition);
+}
+
+.card:hover .mini-phone {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary-light) !important;
+}
+
+
+
+

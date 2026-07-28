@@ -1,11 +1,56 @@
 {% extends "base.html" %}
 {% block title %}Prediksi Harga Rumah - Sapphire Residence Tegal{% endblock %}
 
-{% block content %}
-<div class="page-header">
-    <h1>Prediksi Harga Rumah</h1>
-    <p class="page-subtitle">Estimasi harga KPR berdasarkan spesifikasi unit menggunakan model Artificial Neural Network dengan arsitektur Multi-Layer Perceptron.</p>
+{% block hero %}
+<!-- HERO SECTION -->
+<div class="hero-section mb-4 shadow-sm" style="
+    position: relative; 
+    overflow: hidden; 
+    padding: 80px 0; 
+    display: flex; 
+    align-items: center; 
+    min-height: 380px;">
+
+    <!-- Background Image -->
+    <div style="
+        position: absolute; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        background-image: url('{{ url_for('static', filename='img/footage_sapphire_residence_tegal_02_1x.webp') }}'); 
+        background-size: cover; 
+        background-position: center; 
+        z-index: 0;">
+    </div>
+
+    <!-- Gradient Overlay (Gelap di kiri, transparan di kanan) -->
+    <div style="
+        position: absolute; 
+        top: 0; left: 0; right: 0; bottom: 0; 
+        background: linear-gradient(90deg, rgba(17, 24, 39, 0.95) 0%, rgba(17, 24, 39, 0.7) 50%, rgba(17, 24, 39, 0.1) 100%);
+        z-index: 1;">
+    </div>
+
+    <!-- Hero Content in container -->
+    <div class="container" style="position: relative; z-index: 2;">
+        <div class="hero-content" style="max-width: 650px;">
+            <p class="mb-3"
+                style="color: rgba(255,255,255,0.75); font-size: 0.85rem; letter-spacing: 1.5px; font-weight: 600; text-transform: uppercase;">
+                Cek estimasi pembiayaan kredit rumah dengan kalkulator KPR
+            </p>
+            <h1 class="fw-bold mb-3" style="color: #ffffff; font-size: 2.8rem; line-height: 1.2; letter-spacing: -1px;">
+                Sapphire Residence Tegal
+            </h1>
+            <p style="color: #d1d5db; font-size: 1.15rem; line-height: 1.7; margin-bottom: 0;">
+                Jl. Siklepuh Raya, Mejasem, Pacul
+            </p>
+            <p style="color: #d1d5db; font-size: 1.15rem; line-height: 1.7; margin-bottom: 0;">
+                Kec. Talang, Kota Tegal
+            </p>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block content %}
 
 {% if error %}
 <div class="error-block">{{ error }}</div>
@@ -24,44 +69,45 @@
                     <div class="col-12">
                         <label class="form-label" for="nama_blok">Blok Kavling</label>
                         <select name="nama_blok" id="nama_blok" class="form-select" required>
-                            <option value="" disabled {% if not input_user %}selected{% endif %}>Pilih blok unit</option>
+                            <option value="" disabled {% if not input_user %}selected{% endif %}>Pilih blok unit
+                            </option>
                             {% for blok in daftar_blok %}
-                            <option value="{{ blok }}" {% if input_user and input_user.nama_blok == blok %}selected{% endif %}>{{ blok }}</option>
+                            <option value="{{ blok }}" {% if input_user and input_user.nama_blok==blok %}selected{%
+                                endif %}>{{ blok }}</option>
                             {% endfor %}
                         </select>
                     </div>
 
                     <div class="col-6">
                         <label class="form-label" for="luas_bangunan">Luas Bangunan (m2)</label>
-                        <input type="number" name="luas_bangunan" id="luas_bangunan" class="form-control" placeholder="cth: 38" required value="{{ input_user.luas_bangunan if input_user else '' }}">
+                        <input type="number" name="luas_bangunan" id="luas_bangunan" class="form-control"
+                            placeholder="cth: 38" required value="{{ input_user.luas_bangunan if input_user else '' }}">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="luas_tanah">Luas Tanah (m2)</label>
-                        <input type="number" name="luas_tanah" id="luas_tanah" class="form-control" placeholder="cth: 84" required value="{{ input_user.luas_tanah if input_user else '' }}">
+                        <input type="number" name="luas_tanah" id="luas_tanah" class="form-control"
+                            placeholder="cth: 84" required value="{{ input_user.luas_tanah if input_user else '' }}">
                     </div>
 
                     <div class="col-6">
                         <label class="form-label" for="kamar_tidur">Kamar Tidur</label>
-                        <input type="number" name="kamar_tidur" id="kamar_tidur" class="form-control" value="{{ input_user.kamar_tidur if input_user else '2' }}" required min="1">
+                        <input type="number" name="kamar_tidur" id="kamar_tidur" class="form-control"
+                            value="{{ input_user.kamar_tidur if input_user else '2' }}" required min="1">
                     </div>
                     <div class="col-6">
                         <label class="form-label" for="kamar_mandi">Kamar Mandi</label>
-                        <input type="number" name="kamar_mandi" id="kamar_mandi" class="form-control" value="{{ input_user.kamar_mandi if input_user else '1' }}" required min="1">
+                        <input type="number" name="kamar_mandi" id="kamar_mandi" class="form-control"
+                            value="{{ input_user.kamar_mandi if input_user else '1' }}" required min="1">
                     </div>
 
-                    <div class="col-6">
-                        <label class="form-label" for="posisi">Posisi Kavling</label>
-                        <select name="posisi" id="posisi" class="form-select">
-                            <option value="Standard" {% if input_user and input_user.posisi == 'Standard' %}selected{% endif %}>Standard</option>
-                            <option value="Main Road" {% if input_user and input_user.posisi == 'Main Road' %}selected{% endif %}>Main Road</option>
-                            <option value="Hook" {% if input_user and input_user.posisi == 'Hook' %}selected{% endif %}>Hook</option>
-                        </select>
-                    </div>
+
                     <div class="col-6">
                         <label class="form-label" for="smart_lock">Smart Door Lock</label>
                         <select name="smart_lock" id="smart_lock" class="form-select">
-                            <option value="1" {% if input_user and input_user.smart_lock == '1' %}selected{% endif %}>Ya</option>
-                            <option value="0" {% if input_user and input_user.smart_lock == '0' %}selected{% endif %}>Tidak</option>
+                            <option value="1" {% if input_user and input_user.smart_lock=='1' %}selected{% endif %}>Ya
+                            </option>
+                            <option value="0" {% if input_user and input_user.smart_lock=='0' %}selected{% endif %}>
+                                Tidak</option>
                         </select>
                     </div>
                 </div>
@@ -70,35 +116,72 @@
             <div class="card-panel">
                 <div class="card-panel-header">
                     <span class="card-panel-title">Analisis Kelayakan Kredit</span>
-                    <span class="card-panel-badge">DSR 30%</span>
+                    <span class="card-panel-badge"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="dp_persen">Uang Muka (DP %)</label>
+                    <select name="dp_persen" id="dp_persen" class="form-select">
+                        <option value="5" {% if input_user and input_user.dp_persen=='5' %}selected{% endif %}>5%
+                        </option>
+                        <option value="10" {% if input_user and input_user.dp_persen=='10' %}selected{% endif %}>10%
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="tenor_pilihan">Tenor Kredit (Tahun)</label>
+                    <select name="tenor_pilihan" id="tenor_pilihan" class="form-select">
+                        <option value="10" {% if input_user and input_user.tenor_pilihan=='10' %}selected{% endif %}>10
+                            Tahun</option>
+                        <option value="15" {% if input_user and input_user.tenor_pilihan=='15' %}selected{% endif %}>15
+                            Tahun</option>
+                        <option value="20" {% if input_user and input_user.tenor_pilihan=='20' %}selected{% else
+                            %}selected{% endif %}>20 Tahun</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="usia">Usia(Tahun)</label>
+                    <input type="number" name="usia" id="usia" class="form-control" placeholder="cth: 25" min="21"
+                        value="{{ input_user.usia if input_user else '' }}" required>
+                    <div class="form-hint" style="font-size: 0.8em; color: var(--color-text-muted); margin-top: 4px;">
+                        Minimal usia 21 tahun.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="jenis_pekerjaan">Jenis Pekerjaan</label>
+                    <select name="jenis_pekerjaan" id="jenis_pekerjaan" class="form-select" required>
+                        <option value="" disabled {% if not input_user or not input_user.jenis_pekerjaan %}selected{%
+                            endif %}>Pilih jenis pekerjaan</option>
+                        <option value="Karyawan Tetap" {% if input_user and input_user.jenis_pekerjaan=='Karyawan Tetap'
+                            %}selected{% endif %}>Karyawan Tetap</option>
+                        <option value="Kontrak" {% if input_user and input_user.jenis_pekerjaan=='Kontrak' %}selected{%
+                            endif %}>Karyawan Kontrak</option>
+                        <option value="Profesional/Wiraswasta" {% if input_user and
+                            input_user.jenis_pekerjaan=='Profesional/Wiraswasta' %}selected{% endif %}>
+                            Profesional/Wiraswasta</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="gaji">Penghasilan Bulanan</label>
                     <div class="input-group">
                         <span class="input-group-text">Rp</span>
-                        <input type="number" name="gaji" id="gaji" class="form-control" placeholder="cth: 10000000" value="{{ input_user.gaji if input_user else '' }}">
+                        <input type="number" name="gaji" id="gaji" class="form-control" placeholder="cth: 10000000"
+                            value="{{ input_user.gaji if input_user else '' }}">
                     </div>
-                    <div class="form-hint">Digunakan untuk menghitung rasio hutang (Debt Service Ratio) dengan ambang batas 30%.</div>
-                </div>
-            </div>
-
-            <div class="card-panel">
-                <div class="card-panel-header">
-                    <span class="card-panel-title">Algoritma Optimizer</span>
-                    <span class="card-panel-badge">ANN</span>
                 </div>
 
-                <div class="row g-2">
-                    <div class="col-12">
-                        <label class="form-label" for="optimizer">Pilih Optimizer</label>
-                        <select name="optimizer" id="optimizer" class="form-select">
-                            <option value="lbfgs" {% if input_user and input_user.optimizer == 'lbfgs' %}selected{% endif %}>LBFGS -- Akurasi Tertinggi</option>
-                            <option value="adam" {% if input_user and input_user.optimizer == 'adam' %}selected{% endif %}>ADAM -- Adaptive Moment</option>
-                            <option value="sgd" {% if input_user and input_user.optimizer == 'sgd' %}selected{% endif %}>SGD -- Stochastic Gradient</option>
-                        </select>
-                        <div class="form-hint">LBFGS direkomendasikan untuk dataset berukuran kecil hingga menengah.</div>
+                <div class="mb-3">
+                    <label class="form-label" for="cicilan_lain">Cicilan Eksisting / Hutang Lain</label>
+                    <div class="input-group">
+                        <span class="input-group-text">Rp</span>
+                        <input type="number" name="cicilan_lain" id="cicilan_lain" class="form-control"
+                            placeholder="cth: 1500000" value="{{ input_user.cicilan_lain if input_user else '' }}">
                     </div>
+                    <div class="form-hint">Digunakan bersama cicilan KPR (sesuai tenor) untuk menghitung DSR ambang
+                        batas 30%.</div>
                 </div>
             </div>
 
@@ -111,43 +194,62 @@
 
     <!-- HASIL PREDIKSI -->
     <div class="col-lg-7">
-        {% if hasil_harga %}
+        {% if hasil_prediksi_all %}
 
-        <!-- Harga Prediksi -->
-        <div class="result-block">
-            <div class="result-header">
-                <div class="result-label">Estimasi Harga KPR</div>
-                <div class="result-price">Rp {{ hasil_harga }}</div>
-                <div class="result-note">Prediksi menggunakan optimizer {{ optimizer_nama }} &mdash; Sapphire Residence Tegal</div>
+        <!-- Harga Prediksi Semua Optimizer -->
+        <h5 class="fw-bold mb-3" style="color: var(--color-text);">Estimasi Harga KPR <span
+                class="badge bg-primary ms-2" style="font-size: 0.8rem; font-weight: normal;">Berdasarkan 3
+                Optimizer</span></h5>
+
+        <div class="alert alert-info d-flex align-items-center mb-3 shadow-sm border-0"
+            style="background-color: rgba(13, 124, 102, 0.1); border-left: 4px solid var(--color-primary) !important; color: var(--color-text-secondary);">
+            <i class="bi bi-lightbulb-fill fs-3 text-primary me-3"></i>
+            <div style="font-size: 0.9rem;">
+                <strong style="color: var(--color-primary);">Rekomendasi Sistem:</strong> Berdasarkan metrik evaluasi
+                model, optimizer <strong style="color: var(--color-primary);">{{ opt_utama }}</strong> terbukti paling
+                akurat. Kami menyarankan Anda untuk menggunakan estimasi harga dari <strong>{{ opt_utama }}</strong>
+                sebagai acuan utama.
             </div>
-            <div class="result-body">
-                <div class="row g-3">
-                    <div class="col-6 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-label">R2 Score</div>
-                            <div class="stat-value value-success text-mono">{{ "%.4f"|format(metrik.r2) if metrik.r2 is defined else 'N/A' }}</div>
+        </div>
+
+        <div class="row g-3 mb-4">
+            {% for opt_name, data in hasil_prediksi_all.items() %}
+            <div class="col-12 col-md-4">
+                <div class="result-block position-relative"
+                    style="padding: 16px; height: 100%; {% if opt_name|upper == opt_utama %}box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--color-primary); transform: translateY(-4px);{% endif %}">
+                    {% if opt_name|upper == opt_utama %}
+                    <span class="position-absolute top-0 end-0 bg-warning text-dark px-2 py-1 shadow-sm"
+                        style="font-size: 0.65rem; font-weight: bold; border-bottom-left-radius: 8px; z-index: 10;">
+                        <i class="bi bi-star-fill me-1"></i>TERBAIK
+                    </span>
+                    {% endif %}
+                    <div class="result-header"
+                        style="margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px dashed rgba(255,255,255,0.2);">
+                        <div class="result-label"
+                            style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Optimizer {{
+                            opt_name }}</div>
+                        <div class="result-price" style="font-size: 1.5rem; margin-top: 4px;">Rp {{ data.harga_format }}
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-label">MAPE</div>
-                            <div class="stat-value value-primary text-mono">{{ "%.4f"|format(metrik.mape) if metrik.mape is defined else 'N/A' }}%</div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-label">MAE</div>
-                            <div class="stat-value text-mono fs-sm">Rp {{ "{:,.0f}".format(metrik.mae)|replace(",", ".") if metrik.mae is defined else 'N/A' }}</div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <div class="stat-card">
-                            <div class="stat-label">RMSE</div>
-                            <div class="stat-value text-mono fs-sm">Rp {{ "{:,.0f}".format(metrik.rmse)|replace(",", ".") if metrik.rmse is defined else 'N/A' }}</div>
+                    <div class="result-body p-0" style="background: transparent;">
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.85);">
+                                <span>R2 Score:</span>
+                                <span class="fw-bold" style="color: #fff;">{{ "%.4f"|format(data.metrik.r2) if
+                                    data.metrik.r2 is defined else 'N/A' }}</span>
+                            </div>
+                            <div
+                                style="display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.85);">
+                                <span>MAPE:</span>
+                                <span class="fw-bold" style="color: #fff;">{{ "%.2f"|format(data.metrik.mape) if
+                                    data.metrik.mape is defined else 'N/A' }}%</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
 
         <!-- Simulasi KPR -->
@@ -157,58 +259,85 @@
                 <span class="card-panel-badge">Bunga {{ bunga }}%/thn</span>
             </div>
 
-            <div class="row g-3 mb-4">
-                <div class="col-6 col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-label">Uang Muka (DP {{ dp_persen }}%)</div>
-                        <div class="stat-value fs-sm">Rp {{ dp }}</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-label">Plafon Kredit</div>
-                        <div class="stat-value fs-sm">Rp {{ plafon }}</div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-label">Status Kelayakan</div>
-                        <div class="mt-1">
-                            <span class="status-badge badge-{{ status_utama.kelas }}">{{ status_utama.status }}</span>
+            <!-- Tabs Nav -->
+            <ul class="nav nav-pills mb-4" id="kprTabs" role="tablist">
+                {% for opt_name, data in hasil_prediksi_all.items() %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {% if opt_name|upper == opt_utama %}active{% endif %} fw-bold"
+                        id="tab-{{ opt_name }}" data-bs-toggle="pill" data-bs-target="#content-{{ opt_name }}"
+                        type="button" role="tab" aria-controls="content-{{ opt_name }}"
+                        aria-selected="{% if opt_name|upper == opt_utama %}true{% else %}false{% endif %}">
+                        {{ opt_name|upper }} {% if opt_name|upper == opt_utama %}(Rekomendasi){% endif %}
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <!-- Tabs Content -->
+            <div class="tab-content" id="kprTabsContent">
+                {% for opt_name, data in hasil_prediksi_all.items() %}
+                <div class="tab-pane fade {% if opt_name|upper == opt_utama %}show active{% endif %}"
+                    id="content-{{ opt_name }}" role="tabpanel" aria-labelledby="tab-{{ opt_name }}">
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-label">Uang Muka (DP {{ dp_persen|int }}%)</div>
+                                <div class="stat-value fs-sm">Rp {{ data.dp }}</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-label">Plafon Kredit</div>
+                                <div class="stat-value fs-sm">Rp {{ data.plafon }}</div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-label">Status Kelayakan</div>
+                                <div class="mt-1">
+                                    <span class="status-badge badge-{{ data.dsr.kelas }}">{{ data.dsr.status }}</span>
+                                </div>
+                                <div class="mt-1" style="font-size: 0.75rem; color: var(--color-text-muted);">
+                                    (Berdasarkan Tenor {{ tenor_pilihan }} Thn)
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <div class="row g-3 mb-4">
-                <div class="col-4">
-                    <div class="tenor-card">
-                        <div class="tenor-label">Tenor 10 Tahun</div>
-                        <div class="tenor-value">Rp {{ cicilan_10 }}</div>
-                        <div class="tenor-sub">per bulan</div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-4">
+                            <div class="tenor-card">
+                                <div class="tenor-label">Tenor 10 Tahun</div>
+                                <div class="tenor-value">Rp {{ data.c10 }}</div>
+                                <div class="tenor-sub">per bulan</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="tenor-card">
+                                <div class="tenor-label">Tenor 15 Tahun</div>
+                                <div class="tenor-value">Rp {{ data.c15 }}</div>
+                                <div class="tenor-sub">per bulan</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="tenor-card">
+                                <div class="tenor-label">Tenor 20 Tahun</div>
+                                <div class="tenor-value">Rp {{ data.c20 }}</div>
+                                <div class="tenor-sub">per bulan</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-4">
-                    <div class="tenor-card">
-                        <div class="tenor-label">Tenor 15 Tahun</div>
-                        <div class="tenor-value">Rp {{ cicilan_15 }}</div>
-                        <div class="tenor-sub">per bulan</div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="tenor-card">
-                        <div class="tenor-label">Tenor 20 Tahun</div>
-                        <div class="tenor-value">Rp {{ cicilan_20 }}</div>
-                        <div class="tenor-sub">per bulan</div>
-                    </div>
-                </div>
-            </div>
 
-            {% if status_utama.saran %}
-            <div class="dsr-info dsr-{{ status_utama.kelas }}">
-                {{ status_utama.saran }}
+                    {% if data.dsr.saran %}
+                    <div class="dsr-info dsr-{{ data.dsr.kelas }}">
+                        {{ data.dsr.saran }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                {% endfor %}
             </div>
-            {% endif %}
         </div>
 
         <!-- Tombol Export -->
@@ -220,19 +349,24 @@
                     <input type="hidden" name="lt" value="{{ input_user.luas_tanah }}">
                     <input type="hidden" name="kt" value="{{ input_user.kamar_tidur }}">
                     <input type="hidden" name="km" value="{{ input_user.kamar_mandi }}">
-                    <input type="hidden" name="posisi" value="{{ input_user.posisi }}">
+
                     <input type="hidden" name="sdl" value="{{ input_user.smart_lock }}">
-                    <input type="hidden" name="optimizer" value="{{ optimizer_nama }}">
-                    <input type="hidden" name="harga" value="{{ hasil_harga }}">
-                    <input type="hidden" name="dp" value="{{ dp }}">
-                    <input type="hidden" name="plafon" value="{{ plafon }}">
-                    <input type="hidden" name="cicilan_10" value="{{ cicilan_10 }}">
-                    <input type="hidden" name="cicilan_15" value="{{ cicilan_15 }}">
-                    <input type="hidden" name="cicilan_20" value="{{ cicilan_20 }}">
+                    <input type="hidden" name="optimizer" value="{{ opt_utama }}">
+                    <input type="hidden" name="harga" value="{{ hasil_prediksi_all[opt_utama|lower].harga_format }}">
+                    <input type="hidden" name="dp" value="{{ hasil_prediksi_all[opt_utama|lower].dp }}">
+                    <input type="hidden" name="plafon" value="{{ hasil_prediksi_all[opt_utama|lower].plafon }}">
+                    <input type="hidden" name="cicilan_10" value="{{ hasil_prediksi_all[opt_utama|lower].c10 }}">
+                    <input type="hidden" name="cicilan_15" value="{{ hasil_prediksi_all[opt_utama|lower].c15 }}">
+                    <input type="hidden" name="cicilan_20" value="{{ hasil_prediksi_all[opt_utama|lower].c20 }}">
                     <input type="hidden" name="gaji" value="{{ input_user.gaji }}">
-                    <input type="hidden" name="dsr_status" value="{{ status_utama.status }}">
-                    <input type="hidden" name="dsr_rasio" value="{{ status_utama.rasio }}">
-                    <button type="submit" class="btn-primary-custom" style="background: #0d7c66;">
+                    <input type="hidden" name="usia" value="{{ input_user.usia }}">
+                    <input type="hidden" name="jenis_pekerjaan" value="{{ input_user.jenis_pekerjaan }}">
+                    <input type="hidden" name="cicilan_lain" value="{{ input_user.cicilan_lain }}">
+                    <input type="hidden" name="tenor_pilihan" value="{{ tenor_pilihan }}">
+                    <input type="hidden" name="dp_persen" value="{{ dp_persen|int }}">
+                    <input type="hidden" name="dsr_status" value="{{ hasil_prediksi_all[opt_utama|lower].dsr.status }}">
+                    <input type="hidden" name="dsr_rasio" value="{{ hasil_prediksi_all[opt_utama|lower].dsr.rasio }}">
+                    <button type="submit" class="btn-primary-custom" style="background: var(--color-accent);">
                         <i class="bi bi-file-earmark-spreadsheet"></i>
                         Export Excel
                     </button>
@@ -249,13 +383,114 @@
         {% else %}
         <!-- STATE KOSONG -->
         <div class="card-panel" style="padding: 60px 24px; text-align: center;">
-            <i class="bi bi-house" style="font-size: 48px; color: var(--color-text-muted); display: block; margin-bottom: 16px;"></i>
+            <i class="bi bi-house"
+                style="font-size: 48px; color: var(--color-text-muted); display: block; margin-bottom: 16px;"></i>
             <h3 style="color: var(--color-text-secondary); font-weight: 700; margin-bottom: 8px;">Hasil Prediksi</h3>
             <p style="color: var(--color-text-muted); font-size: 13.5px; max-width: 360px; margin: 0 auto;">
-                Isi form spesifikasi unit di sebelah kiri, kemudian tekan tombol "Hitung Prediksi" untuk melihat estimasi harga dan analisis kelayakan kredit.
+                Isi form spesifikasi unit di sebelah kiri, kemudian tekan tombol "Hitung Prediksi" untuk melihat
+                estimasi harga dan analisis kelayakan kredit.
             </p>
         </div>
         {% endif %}
+    </div>
+</div>
+
+
+<!-- FAQ SECTION -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card-panel">
+            <div class="card-panel-header mb-4">
+                <span class="card-panel-title">FAQ</span>
+            </div>
+
+            <div class="accordion accordion-flush" id="faqAccordion">
+
+                <!-- FAQ 1 -->
+                <div class="accordion-item"
+                    style="background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"
+                            style="background: transparent; color: var(--color-text); box-shadow: none; padding: 16px 0; font-weight: 600;">
+                            Seberapa Akurat Cek Harga Rumah Sapphire Griya?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body"
+                            style="color: var(--color-text-muted); padding: 0 0 16px 0; font-size: 0.9rem; line-height: 1.6;">
+                            Akurasi estimasi harga didasarkan pada model <em>Machine Learning</em> (Artificial Neural
+                            Network) yang secara spesifik dilatih menggunakan data historis riil penjualan unit dari
+                            Sapphire Residence Tegal. Sistem membandingkan 3 <em>optimizer</em> terbaik dan selalu
+                            merekomendasikan model dengan metrik keakuratan paling tinggi (berdasarkan nilai MAE dan R2
+                            Score) untuk memastikan prediksi Anda sedekat mungkin dengan harga aktual.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="accordion-item"
+                    style="background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
+                            style="background: transparent; color: var(--color-text); box-shadow: none; padding: 16px 0; font-weight: 600;">
+                            Kenapa Mengetahui Nilai Properti Itu Penting?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body"
+                            style="color: var(--color-text-muted); padding: 0 0 16px 0; font-size: 0.9rem; line-height: 1.6;">
+                            Dengan mengetahui nilai properti di suatu kawasan saat beli rumah, maka anda bisa melakukan
+                            perbandingan dan memilih yang sesuai dengan kemampuan finansial.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="accordion-item"
+                    style="background: transparent; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"
+                            style="background: transparent; color: var(--color-text); box-shadow: none; padding: 16px 0; font-weight: 600;">
+                            Apa Faktor-Faktor Yang Mempengaruhi Nilai Properti?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body"
+                            style="color: var(--color-text-muted); padding: 0 0 16px 0; font-size: 0.9rem; line-height: 1.6;">
+                            Di perumahan Sapphire Residence, nilai properti utamanya dipengaruhi oleh spesifikasi fisik
+                            dan tata letak unit.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="accordion-item" style="background: transparent; border-bottom: none;">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour"
+                            style="background: transparent; color: var(--color-text); box-shadow: none; padding: 16px 0; font-weight: 600;">
+                            Bagaimana Mengetahui Nilai Properti?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                        data-bs-parent="#faqAccordion">
+                        <div class="accordion-body"
+                            style="color: var(--color-text-muted); padding: 0 0 16px 0; font-size: 0.9rem; line-height: 1.6;">
+                            Beberapa cara yang bisa dicoba untuk mengecek nilai properti yaitu: - Lakukan survei dan
+                            perbandingan dengan mencari properti lain yang memiliki ukuran atau model sama di lokasi
+                            tersebut - Bertanya pada agen properti - Menggunakan fitur penghitung online
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

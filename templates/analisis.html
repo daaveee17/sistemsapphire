@@ -4,7 +4,8 @@
 {% block content %}
 <div class="page-header">
     <h1>Analisis Statistik</h1>
-    <p class="page-subtitle">Analisis deskriptif dataset, pengujian hipotesis (Uji F dan Uji t), serta distribusi data unit Sapphire Residence Tegal.</p>
+    <p class="page-subtitle">Analisis deskriptif dataset, pengujian hipotesis (Uji F dan Uji t), serta distribusi data
+        unit Sapphire Residence Tegal.</p>
 </div>
 
 <!-- RINGKASAN DATASET -->
@@ -19,19 +20,22 @@
     <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label">Harga Terendah</div>
-            <div class="stat-value fs-sm text-mono">Rp {{ "{:,.0f}".format(deskriptif.rentang_harga.min)|replace(",", ".") if deskriptif.get('rentang_harga') else 'N/A' }}</div>
+            <div class="stat-value fs-sm text-mono">Rp {{ "{:,.0f}".format(deskriptif.rentang_harga.min)|replace(",",
+                ".") if deskriptif.get('rentang_harga') else 'N/A' }}</div>
         </div>
     </div>
     <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label">Harga Tertinggi</div>
-            <div class="stat-value fs-sm text-mono">Rp {{ "{:,.0f}".format(deskriptif.rentang_harga.max)|replace(",", ".") if deskriptif.get('rentang_harga') else 'N/A' }}</div>
+            <div class="stat-value fs-sm text-mono">Rp {{ "{:,.0f}".format(deskriptif.rentang_harga.max)|replace(",",
+                ".") if deskriptif.get('rentang_harga') else 'N/A' }}</div>
         </div>
     </div>
     <div class="col-6 col-md-3">
         <div class="stat-card">
             <div class="stat-label">Rata-rata Harga</div>
-            <div class="stat-value fs-sm text-mono">Rp {{ "{:,.0f}".format(deskriptif.rentang_harga.mean)|replace(",", ".") if deskriptif.get('rentang_harga') else 'N/A' }}</div>
+            <div class="stat-value fs-sm text-mono">Rp {{ "{:,.0f}".format(deskriptif.rentang_harga.mean)|replace(",",
+                ".") if deskriptif.get('rentang_harga') else 'N/A' }}</div>
         </div>
     </div>
 </div>
@@ -40,7 +44,7 @@
 <div class="card-panel">
     <div class="card-panel-header">
         <span class="card-panel-title">Statistik Deskriptif Variabel</span>
-        <span class="card-panel-badge">Tabel 3.1</span>
+        <span class="card-panel-badge"></span>
     </div>
 
     <div class="table-responsive">
@@ -145,121 +149,6 @@
     </div>
 </div>
 
-<!-- UJI F (SIMULTAN) -->
-<div class="card-panel mt-4">
-    <div class="card-panel-header">
-        <span class="card-panel-title">Uji F -- Pengaruh Simultan (H1)</span>
-        <span class="card-panel-badge">alpha = 0.05</span>
-    </div>
-
-    {% if statistik.get('uji_f') %}
-    <div class="row g-3 mb-4">
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="stat-label">F-Statistic</div>
-                <div class="stat-value text-mono fs-sm">{{ "{:,.4f}".format(statistik.uji_f.f_statistic)|replace(",", ".") }}</div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="stat-label">P-Value</div>
-                <div class="stat-value text-mono fs-sm">{{ "%.2e"|format(statistik.uji_f.p_value) }}</div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="stat-label">R-Squared</div>
-                <div class="stat-value text-mono">{{ "%.6f"|format(statistik.r_squared) }}</div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="stat-card">
-                <div class="stat-label">Kesimpulan</div>
-                <div class="mt-1">
-                    {% if statistik.uji_f.signifikan %}
-                    <span class="status-badge badge-success">Signifikan</span>
-                    {% else %}
-                    <span class="status-badge badge-danger">Tidak Signifikan</span>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="dsr-info dsr-success">
-        <strong>H1 Diterima:</strong> Seluruh variabel independen (Luas Bangunan, Luas Tanah, Jumlah Kamar Tidur, Jumlah Kamar Mandi, dan Nama Blok)
-        secara bersama-sama berpengaruh signifikan terhadap variabel Harga KPR.
-        Nilai R-Squared sebesar {{ "%.4f"|format(statistik.r_squared) }} menunjukkan bahwa {{ "%.2f"|format(statistik.r_squared * 100) }}% variasi harga rumah
-        dapat dijelaskan oleh variabel-variabel dalam model.
-    </div>
-    {% endif %}
-</div>
-
-<!-- UJI T (PARSIAL) -->
-<div class="card-panel">
-    <div class="card-panel-header">
-        <span class="card-panel-title">Uji t -- Pengaruh Parsial (H2)</span>
-        <span class="card-panel-badge">alpha = 0.05</span>
-    </div>
-
-    {% if statistik.get('uji_t') %}
-    <div class="table-responsive">
-        <table class="table-custom">
-            <thead>
-                <tr>
-                    <th>Variabel</th>
-                    <th class="cell-right">Koefisien</th>
-                    <th class="cell-right">t-Statistic</th>
-                    <th class="cell-right">P-Value</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in statistik.uji_t %}
-                <tr>
-                    <td><strong>{{ item.variabel }}</strong></td>
-                    {% if item.get('keterangan') %}
-                    <td class="cell-right cell-mono" style="color: var(--color-text-muted);">--</td>
-                    <td class="cell-right cell-mono" style="color: var(--color-text-muted);">--</td>
-                    <td class="cell-right cell-mono" style="color: var(--color-text-muted);">--</td>
-                    <td><span class="status-badge badge-info">{{ item.keterangan }}</span></td>
-                    {% else %}
-                    <td class="cell-right cell-mono">{{ "{:,.4f}".format(item.koefisien)|replace(",", ".") }}</td>
-                    <td class="cell-right cell-mono">{{ "%.4f"|format(item.t_statistic) }}</td>
-                    <td class="cell-right cell-mono">{{ "%.6f"|format(item.p_value) }}</td>
-                    <td>
-                        {% if item.signifikan %}
-                        <span class="status-badge badge-success">Signifikan</span>
-                        {% else %}
-                        <span class="status-badge badge-danger">Tidak Signifikan</span>
-                        {% endif %}
-                    </td>
-                    {% endif %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    <div class="section-divider"></div>
-
-    <div style="font-size: 13.5px; line-height: 1.8; color: var(--color-text-secondary);">
-        <p><strong style="color: var(--color-text);">Interpretasi:</strong>
-        Berdasarkan hasil Uji t, variabel yang memiliki pengaruh signifikan (p-value &lt; 0.05) secara parsial terhadap Harga KPR adalah:
-        {% set sig_vars = [] %}
-        {% for item in statistik.uji_t %}
-            {% if item.signifikan %}
-                {% if sig_vars.append(item.variabel) %}{% endif %}
-            {% endif %}
-        {% endfor %}
-        <strong style="color: var(--color-text);">{{ sig_vars|join(', ') }}</strong>.
-        </p>
-        <p>Variabel dengan koefisien positif tertinggi menunjukkan kontribusi terbesar terhadap kenaikan harga rumah.
-        Hal ini sejalan dengan hipotesis H2 yang menyatakan bahwa masing-masing variabel fisik bangunan memiliki pengaruh signifikan
-        terhadap penentuan harga jual unit di Sapphire Residence Tegal.</p>
-    </div>
-    {% endif %}
-</div>
 
 <!-- INFO TAMBAHAN -->
 <div class="card-panel">
@@ -272,7 +161,8 @@
         <div class="col-6 col-md-3">
             <div class="stat-card">
                 <div class="stat-label">N Observasi</div>
-                <div class="stat-value text-mono">{{ statistik.n_observations if statistik.n_observations else 'N/A' }}</div>
+                <div class="stat-value text-mono">{{ statistik.n_observations if statistik.n_observations else 'N/A' }}
+                </div>
             </div>
         </div>
         <div class="col-6 col-md-3">
@@ -290,7 +180,8 @@
         <div class="col-6 col-md-3">
             <div class="stat-card">
                 <div class="stat-label">Adj. R-Squared</div>
-                <div class="stat-value text-mono">{{ "%.6f"|format(statistik.adj_r_squared) if statistik.adj_r_squared else 'N/A' }}</div>
+                <div class="stat-value text-mono">{{ "%.6f"|format(statistik.adj_r_squared) if statistik.adj_r_squared
+                    else 'N/A' }}</div>
             </div>
         </div>
     </div>
@@ -300,7 +191,7 @@
 <!-- Tombol Export -->
 <div class="row g-3 no-print">
     <div class="col-6">
-        <a href="/export/analisis" class="btn-primary-custom" style="background: #0d7c66; text-decoration: none;">
+        <a href="/export/analisis" class="btn-primary-custom" style="background: var(--color-accent); text-decoration: none;">
             <i class="bi bi-file-earmark-spreadsheet"></i>
             Export Excel
         </a>
@@ -318,7 +209,7 @@
 <script>
     // Distribusi Tipe Chart
     {% if deskriptif.get('distribusi_tipe') %}
-    const tipeData = {{ deskriptif.distribusi_tipe|tojson }};
+    const tipeData = {{ deskriptif.distribusi_tipe| tojson }};
     const tipeLabels = Object.keys(tipeData);
     const tipeCounts = tipeLabels.map(l => tipeData[l].count);
 
@@ -353,7 +244,7 @@
 
     // Distribusi Tahap Chart
     {% if deskriptif.get('distribusi_tahap') %}
-    const tahapData = {{ deskriptif.distribusi_tahap|tojson }};
+    const tahapData = {{ deskriptif.distribusi_tahap| tojson }};
     const tahapLabels = Object.keys(tahapData);
     const tahapCounts = tahapLabels.map(l => tahapData[l].count);
 

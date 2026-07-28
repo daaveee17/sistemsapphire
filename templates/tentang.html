@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Tentang Kami - Sapphire Residence Tegal{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Visi, Misi -->
+    <div class="row mb-5 align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+            <!-- Gambar -->
+            <img src="{{ url_for('static', filename='img/footage_sapphire_residence_tegal_02_1x.webp') }}"
+                alt="Ilustrasi Sapphire Residence" class="img-fluid rounded shadow-sm w-100"
+                style="object-fit: cover; height: 100%; max-height: 500px;">
+        </div>
+        <div class="col-lg-6">
+            <h3 class="fw-bold mb-3 text-primary">Visi</h3>
+            <p class="text-muted mb-4">
+                Sebuah platform digital terdepan dalam penyediaan analisis properti berbasis kecerdasan buatan yang
+                akurat, transparan, dan terpercaya untuk mendukung ekosistem investasi properti yang lebih cerdas di
+                Sapphire Residence Tegal.
+            </p>
+
+            <h3 class="fw-bold mb-3 text-primary">Misi</h3>
+            <ul class="text-muted mb-4 ps-3" style="line-height: 1.8;">
+                <li><strong>Transformasi Digital Properti:</strong> Menghadirkan teknologi Machine Learning tingkat
+                    lanjut untuk mendigitalisasi proses estimasi harga properti secara objektif.</li>
+                <li><strong>Akurasi Data Berbasis Teknologi:</strong> Mengoptimalkan model Artificial Neural Network
+                    dengan algoritma mutakhir untuk menghasilkan proyeksi nilai pasar yang relevan dan presisi.</li>
+                <li><strong>Pemberdayaan Pengambilan Keputusan:</strong> Menyediakan instrumen pendukung bagi calon
+                    pembeli dan pengembang dalam menentukan langkah strategis berdasarkan analisis data yang
+                    komprehensif.</li>
+                <li><strong>Fokus Solusi Lokal:</strong> Memberikan pemahaman mendalam terhadap dinamika pasar properti
+                    spesifik, dimulai dari pengembangan kawasan potensial di Sapphire Residence Tegal.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
